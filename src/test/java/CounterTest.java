@@ -22,10 +22,10 @@ public class CounterTest {
 
         int incrementCallsCount = 11;
 
-        List<? extends Future<?>> futures = range(0, incrementCallsCount)
+        List<Future> futures = range(0, incrementCallsCount)
                 .mapToObj(i -> executors.submit(incrementRunnable()))
                 .collect(toList());
-        for (Future<?> future : futures) {
+        for (Future future : futures) {
             future.get();
         }
         assertEquals("Oops! Smth is wrong!", incrementCallsCount, counter.getValue());
